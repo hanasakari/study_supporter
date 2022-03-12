@@ -12,32 +12,37 @@
 // See https://developer.chrome.com/extensions/content_scripts
 
 // Log `title` of current active web page
-const pageTitle = document.head.getElementsByTagName('title')[0].innerHTML;
-console.log(
-  `Page title is: '${pageTitle}' - evaluated by Chrome extension's 'contentScript.js' file`
-);
 
-// Communicate with background file by sending a message
-chrome.runtime.sendMessage(
-  {
-    type: 'GREETINGS',
-    payload: {
-      message: 'Hello, my name is Con. I am from ContentScript.',
-    },
-  },
-  response => {
-    console.log(response.message);
-  }
-);
+let config = {
+    attributes: true, //目标节点的属性变化
+    childList: true, //目标节点的子节点的新增和删除
+    characterData: true, //如果目标节点为characterData节点(一种抽象接口,具体可以为文本节点,注释节点,以及处理指令节点)时,也要观察该节点的文本内容是否发生变化
+    subtree: true, //目标节点所有后代节点的attributes、childList、characterData变化
+};
 
-// Listen for message
-chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
-  if (request.type === 'COUNT') {
-    console.log(`Current count is ${request.payload.count}`);
-  }
+const mutationCallback = (mutationsList) => {
+    for(let mutation of mutationsList) {
+        let type = mutation.type;
+        switch (type) {
+            case "childList":
+                let dom = document.querySelector(".layui-layer.layui-layer-dialog")
+                if (dom){
+                    let btn =  document.querySelector(".layui-layer-btn0");
+                    btn.click();
+                }
+                console.log("点击成功");
+                break;
+            // case "attributes":
+            //   console.log(`The ${mutation.attributeName} attribute was modified.`);
+            //   break;
+            // case "subtree":
+            //   console.log(`The subtree was modified.`);
+            //   break;
+            default:
+                break;
+        }
+    }
+};
 
-  // Send an empty response
-  // See https://github.com/mozilla/webextension-polyfill/issues/130#issuecomment-531531890
-  sendResponse({});
-  return true;
-});
+var observe = new MutationObserver(mutationCallback);
+observe.observe(document.querySelector('body'), config);

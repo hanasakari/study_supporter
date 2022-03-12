@@ -5,17 +5,26 @@
 // For more information on background script,
 // See https://developer.chrome.com/extensions/background_pages
 
-chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
-  if (request.type === 'GREETINGS') {
-    const message = `Hi ${
-      sender.tab ? 'Con' : 'Pop'
-    }, my name is Bac. I am from Background. It's great to hear from you.`;
+chrome.tabs.onUpdated.addListener(function (tabId, changeInfo, tab) {
+    console.log('init');
 
-    // Log message coming from the `request` parameter
-    console.log(request.payload.message);
-    // Send a response message
-    sendResponse({
-      message,
-    });
-  }
+    if (changeInfo.url == undefined) {
+        return false;
+    }
+    // 检查是否是wish页面的tab
+    // if(tab.url.indexOf('pinterest.com') > 0){
+
+    // 通知对应的tab页面url变化了,需要优化为离开立即移除，进入则加载完毕再添加
+    if (tab.status === 'loading') {
+
+        chrome.tabs.sendMessage(tabId, {
+            type: 'tabUpdate', tab: tab
+        }, function (response) {
+
+            console.log('来自content的回复：' + response);
+
+            console.log('inited');
+        });
+        // }
+    }
 });

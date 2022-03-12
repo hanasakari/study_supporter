@@ -1,8 +1,8 @@
 {
-  "manifest_version": 2,
-  "name": "Zentao_multiple_task_creater",
+  "manifest_version": 3,
+  "name": "上大网课助手",
   "version": "0.1.0",
-  "description": "My Chrome Extension",
+  "description": "用于监控网课查看完毕自动切换到下一个网课的工具",
   "icons": {
     "16": "icons/icon_16.png",
     "32": "icons/icon_32.png",
@@ -10,23 +10,21 @@
     "128": "icons/icon_128.png"
   },
   "background": {
-    "scripts": [
-      "background.js"
-    ],
-    "persistent": false
+    "service_worker": "background.js"
   },
-  "browser_action": {
-    "default_title": "Zentao_multiple_task_creater",
+  "action": {
+    "default_title": "上大网课助手",
     "default_popup": "popup.html"
   },
   "permissions": [
-    "storage"
+    "tabs",
+    "activeTab"
+  ],
+  "host_permissions": [
+    "https://sdjj.ct-edu.com.cn/"
   ],
   "content_scripts": [
     {
-      "matches": [
-        "<all_urls>"
-      ],
       "run_at": "document_idle",
       "js": [
         "contentScript.js"
