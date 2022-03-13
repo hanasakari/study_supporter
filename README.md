@@ -1,4 +1,4 @@
-# <img src="public/icons/icon_48.png" width="45" align="left"> study_supporter
+# study_supporter
 
 网络学习平台上课助手
 
