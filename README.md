@@ -1,21 +1,14 @@
-# <img src="public/icons/icon_48.png" width="45" align="left"> Zentao_multiple_task_creater
+# <img src="public/icons/icon_48.png" width="45" align="left"> study_supporter
 
-My Chrome Extension
+网络学习平台上课助手
 
-## Features
+## 功能
 
-- Feature 1
-- Feature 2
+- 拥有倒计时5秒继续下一课功能
 
-## Install
+## 安装方式
 
-[**Chrome** extension]() <!-- TODO: Add chrome extension link inside parenthesis -->
+- build后进入chrome的管理扩展程序->加载已解压的的扩展程序->选择build文件夹即可
 
-## Contribution
-
-Suggestions and pull requests are welcomed!.
-
----
-
-This project was bootstrapped with [Chrome Extension CLI](https://github.com/dutiyesh/chrome-extension-cli)
-
+## 联系方式
+- 提issue即可
