@@ -1,6 +1,6 @@
 {
   "manifest_version": 3,
-  "name": "上大网课助手",
+  "name": "网课助手",
   "version": "0.1.0",
   "description": "用于监控网课查看完毕自动切换到下一个网课的工具",
   "icons": {
@@ -13,7 +13,7 @@
     "service_worker": "background.js"
   },
   "action": {
-    "default_title": "上大网课助手",
+    "default_title": "网课助手",
     "default_popup": "popup.html"
   },
   "permissions": [
@@ -21,11 +21,11 @@
     "activeTab"
   ],
   "host_permissions": [
-    "https://sdjj.ct-edu.com.cn/"
+    "https://*.ct-edu.com.cn/"
   ],
   "content_scripts": [
     {
-      "matches": ["https://sdjj.ct-edu.com.cn/*"],
+      "matches": ["https://*.ct-edu.com.cn/*"],
       "run_at": "document_idle",
       "js": [
         "contentScript.js"
