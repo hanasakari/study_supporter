@@ -25,6 +25,7 @@
   ],
   "content_scripts": [
     {
+      "matches": ["https://sdjj.ct-edu.com.cn/*"],
       "run_at": "document_idle",
       "js": [
         "contentScript.js"
